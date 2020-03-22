@@ -3,6 +3,7 @@ package main
 import "fmt"
 
 func main() {
+
 	// 変数定義と代入が一緒
 	var helloWorld1 string = "Hello world !"
 	fmt.Println("変数定義と代入が一緒", helloWorld1)
