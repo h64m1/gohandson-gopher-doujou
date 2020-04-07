@@ -1,6 +1,6 @@
 package main
 
-func main() {
+func existingType() {
 	// 組み込み型（数値）
 	var sum int
 	sum = 5 + 6 + 3
@@ -34,5 +34,25 @@ func main() {
 			}
 		}
 	}
+}
 
+func compositType() {
+	// 配列
+	// ゼロ値で初期化
+	var ns1 [5]int
+
+	// 配列リテラルで初期化
+	var ns2 = [5]int{10, 20, 30, 40, 50}
+
+	println(ns1[3], ns2[4])
+}
+
+func main() {
+	// 組み込み型
+	println("組み込み型")
+	existingType()
+
+	// コンポジット型
+	println("コンポジット型")
+	compositType()
 }
