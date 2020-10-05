@@ -38,12 +38,6 @@ func existingType() {
 	}
 }
 
-func compositType() {
-	// 配列
-	println("配列")
-	showArray()
-}
-
 func showArray() {
 	// 配列
 	// ゼロ値で初期化
@@ -66,11 +60,55 @@ func showArray() {
 }
 
 func printArray(title string, array []int) {
-	print(title, ": ")
+	print("配列| ", title, ": ")
 	for i := 0; i < len(array); i++ {
 		fmt.Printf("%d ", array[i])
 	}
 	print("\n")
+}
+
+func showSlice() {
+	// ゼロ値はnil
+	var ns1 []int
+	printSlice("ns1", ns1)
+
+	// 長さと容量を指定して初期化
+	// 各要素はゼロ値で初期化
+	ns1 = make([]int, 3, 10)
+	printSlice("ns1", ns1)
+
+	// スライスリテラルで初期化
+	// 要素数は指定しなくてよい
+	// 自動で配列は作られる
+	var ns2 = []int{10, 20, 30, 40, 50}
+	printSlice("ns2", ns2)
+
+	// 5番目が50、10番目が100で他が0の要素数11のスライス
+	ns3 := []int{5: 50, 10: 100}
+	printSlice("ns3", ns3)
+}
+
+func printSlice(title string, slice []int) {
+	print("スライス | ", title, ": ")
+	if slice == nil {
+		println("nil")
+		return
+	}
+
+	for i := 0; i < len(slice); i++ {
+		fmt.Printf("%d ", slice[i])
+	}
+	print("\n")
+}
+
+func compositType() {
+	// 配列
+	println("配列")
+	showArray()
+
+	// スライス
+	println("スライス")
+	showSlice()
 }
 
 func main() {
