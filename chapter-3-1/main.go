@@ -86,6 +86,43 @@ func showSlice() {
 	// 5番目が50、10番目が100で他が0の要素数11のスライス
 	ns3 := []int{5: 50, 10: 100}
 	printSlice("ns3", ns3)
+
+	// スライスの操作
+	ns4 := []int{10, 20, 30, 40, 50}
+
+	println("要素にアクセス: ", ns4[3])
+	println("長さ: ", len(ns4))
+
+	// 要素の追加
+	ns4 = append(ns4, 60, 70)
+	// 容量
+	println("長さ: ", len(ns4), ", 容量: ", cap(ns4))
+
+	// appendの挙動
+	ns5 := []int{10, 20}
+	fmt.Println("ns5: ", ns5, cap(ns5))
+
+	ns6 := append(ns5, 30)
+	ns5[0] = 100
+	fmt.Println("ns5: ", ns5, cap(ns5))
+	fmt.Println("ns6: ", ns6, cap(ns6))
+
+	ns7 := append(ns6, 40)
+	ns6[1] = 200
+	fmt.Println("ns5: ", ns5, cap(ns5))
+	fmt.Println("ns6: ", ns6, cap(ns6))
+	fmt.Println("ns7: ", ns7, cap(ns7))
+
+	// 配列・スライスへのスライス演算
+	ns8 := []int{10, 20, 30, 40, 50}
+	n, m := 2, 4
+	// n番目以降のスライスを取得
+	fmt.Println(ns8[n:])
+	// 先頭からm-1番目までのスライスを取得する
+	fmt.Println(ns8[:m])
+
+	ms := ns8[:m:m]
+	fmt.Println(ms, cap(ms))
 }
 
 func printSlice(title string, slice []int) {
