@@ -123,6 +123,22 @@ func showSlice() {
 
 	ms := ns8[:m:m]
 	fmt.Println(ms, cap(ms))
+
+	// slice tricks
+	// Cut
+	printSlice("ns2", ns2)
+	ns2 = append(ns2[:1], ns2[3:]...)
+	printSlice("cut ns2", ns2)
+
+	// Delete
+	i := 1
+	printSlice("ns2", ns2)
+	ns2 = append(ns2[:i], ns2[i+1:]...)
+	printSlice("delete ns2", ns2)
+	// or
+	printSlice("ns2", ns2)
+	ns2 = ns2[:i+copy(ns2[i:], ns2[i+1:])]
+	printSlice("delete ns2", ns2)
 }
 
 func printSlice(title string, slice []int) {
@@ -148,6 +164,26 @@ func compositType() {
 	showSlice()
 }
 
+func useSlice() {
+	// 3つの変数しか使わないように修正してください
+	// - プログラムの動作はそのままにすること
+	n1 := 19
+	n2 := 86
+	n3 := 1
+	n4 := 12
+
+	sum1 := n1 + n2 + n3 + n4
+	println("sum1", sum1)
+
+	// 修正版
+	n := []int{19, 86, 1, 12}
+	sum2 := 0
+	for i := 0; i < len(n); i++ {
+		sum2 += n[i]
+	}
+	println("sum2", sum2)
+}
+
 func main() {
 	// 組み込み型
 	println("組み込み型")
@@ -156,4 +192,8 @@ func main() {
 	// コンポジット型
 	println("コンポジット型")
 	compositType()
+
+	// スライスの利用
+	println("スライスの利用")
+	useSlice()
 }
