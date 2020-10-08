@@ -184,6 +184,36 @@ func useSlice() {
 	println("sum2", sum2)
 }
 
+func mapType() {
+	// マップの初期化
+	// ゼロ値はnil
+	var m map[string]int
+	printMap("ゼロ値はnil", m)
+
+	// makeで初期化
+	m = make(map[string]int)
+	printMap("makeで初期化", m)
+
+	// 容量の指定
+	m = make(map[string]int, 10)
+	printMap("容量の指定", m)
+
+	// リテラルで初期化
+	m1 := map[string]int{"x": 10, "y": 20}
+	printMap("リテラルで初期化", m1)
+
+	// 空で初期化
+	m2 := map[string]int{}
+	printMap("空で初期化", m2)
+}
+
+func printMap(title string, m map[string]int) {
+	println(title, " | len=", len(m))
+	for k, v := range m {
+		println("key", k, ", value", v)
+	}
+}
+
 func main() {
 	// 組み込み型
 	println("組み込み型")
@@ -196,4 +226,8 @@ func main() {
 	// スライスの利用
 	println("スライスの利用")
 	useSlice()
+
+	// マップ
+	println("マップ")
+	mapType()
 }
