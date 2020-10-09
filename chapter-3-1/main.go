@@ -186,6 +186,14 @@ func useSlice() {
 
 func mapType() {
 	// マップの初期化
+	mapInit()
+
+	// マップの操作
+	mapManipulation()
+}
+
+func mapInit() {
+	// マップの初期化
 	// ゼロ値はnil
 	var m map[string]int
 	printMap("ゼロ値はnil", m)
@@ -205,6 +213,33 @@ func mapType() {
 	// 空で初期化
 	m2 := map[string]int{}
 	printMap("空で初期化", m2)
+}
+
+func mapManipulation() {
+	println("マップの操作")
+
+	// マップの操作
+	m := map[string]int{"x": 10, "y": 20}
+
+	// キーを指定してアクセス
+	println(m["x"])
+
+	// キーを指定して入力
+	m["z"] = 30
+
+	// 存在を確認する
+	n, ok := m["z"]
+	println(n, ok)
+
+	n, ok = m["a"]
+	println(n, ok)
+
+	// キーを指定して削除
+	delete(m, "z")
+
+	// 削除されていることを確認
+	n, ok = m["z"]
+	println(n, ok)
 }
 
 func printMap(title string, m map[string]int) {
