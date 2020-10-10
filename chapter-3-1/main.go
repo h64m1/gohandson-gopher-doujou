@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func existingType() {
 	// 組み込み型（数値）
@@ -249,6 +252,32 @@ func printMap(title string, m map[string]int) {
 	}
 }
 
+func userDefinedType() {
+	// 基底型とユーザ定義型の相互キャストが可能
+	type MyInt int
+	var n int = 100
+	m := MyInt(n)
+	n = int(m)
+	println(m, n)
+
+	// 型なし定数から明示的なキャストは不要
+	// 10秒を表す, time.Duration型
+	d := 10 * time.Second
+	println(d)
+
+	// - とあるゲームの得点を集計するプログラム
+	// - ゲームの結果は0点から100点まで1点刻みで点数がつけられる
+	// - 集計は複数回のゲームの結果をもとにユーザごとに行う
+	// - どういう構造で1回のゲーム結果を表現するべきか
+	// - 適切だと思うユーザ定義型を定義してください
+
+	type Score struct {
+		user  string
+		game  string
+		score int
+	}
+}
+
 func main() {
 	// 組み込み型
 	println("組み込み型")
@@ -265,4 +294,8 @@ func main() {
 	// マップ
 	println("マップ")
 	mapType()
+
+	// ユーザー定義型
+	println("ユーザー定義型")
+	userDefinedType()
 }
