@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"time"
 )
 
@@ -276,6 +277,10 @@ func userDefinedType() {
 		game  string
 		score int
 	}
+
+	// 型エイリアス
+	type Applicant = http.Client
+	fmt.Printf("%T:%T\n", Applicant{}, http.Client{})
 }
 
 func main() {
