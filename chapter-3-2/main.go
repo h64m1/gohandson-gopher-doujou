@@ -11,6 +11,9 @@ func main() {
 
 	// 無名関数
 	printClosure()
+
+	// 値のコピー、ポインタ
+	printCopyValue()
 }
 
 func printBuiltinFunction() {
@@ -70,4 +73,37 @@ func printClosure() {
 	for _, f := range fs2 {
 		f()
 	}
+}
+
+func printCopyValue() {
+	p1 := struct {
+		age  int
+		name string
+	}{age: 10, name: "Gopher"}
+
+	// copy
+	p2 := p1
+	p2.age = 20
+	println(p1.age, p1.name)
+	println(p2.age, p2.name)
+
+	// ポインタ
+	var x int
+	set100(&x)
+	println(x)
+
+	// 内部でポインタが用いられているデータ型
+	// - スライス
+	// - マップ
+	// - チャネル
+	ns1 := []int{10, 20, 30}
+	ns2 := ns1
+	ns1[1] = 200
+	println(ns1[0], ns1[1], ns1[2])
+	println(ns2[0], ns2[1], ns2[2])
+}
+
+func set100(xp *int) {
+	// ポインタに値を代入
+	*xp = 100
 }
