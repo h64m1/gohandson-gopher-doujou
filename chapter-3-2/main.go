@@ -14,6 +14,15 @@ func main() {
 
 	// 値のコピー、ポインタ
 	printCopyValue()
+
+	// 奇数偶数判定関数
+	evalEvalOdd()
+
+	// 複数戻り値の利用
+	multipleReturnValues()
+
+	// ポインタ
+	pointer()
 }
 
 func printBuiltinFunction() {
@@ -106,4 +115,34 @@ func printCopyValue() {
 func set100(xp *int) {
 	// ポインタに値を代入
 	*xp = 100
+}
+
+func evalEvalOdd() {
+	for i := 1; i <= 100; i++ {
+		print(i)
+		if isEven(i) {
+			println("-偶数")
+		} else {
+			println("-奇数")
+		}
+	}
+}
+
+func isEven(value int) bool {
+	return value%2 == 0
+}
+
+func multipleReturnValues() {
+	n, m := swap(10, 20)
+	println(n, m)
+}
+
+func pointer() {
+	n, m := 10, 20
+	swap2(&n, &m)
+	println(n, m)
+}
+
+func swap2(n, m *int) {
+	*n, *m = *m, *n
 }
