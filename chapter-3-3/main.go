@@ -10,6 +10,14 @@ func main() {
 	receiver()
 
 	increment()
+
+	// メソッド値とメソッド式
+	var hex Hex = 100
+	f1 := hex.String
+	fmt.Println(f1())
+
+	f2 := Hex.String
+	fmt.Printf("%T\n%s\n", f2, f2(hex))
 }
 
 // メソッド: レシーバと紐付けられた関数
