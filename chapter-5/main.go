@@ -26,4 +26,29 @@ func main() {
 
 	// flag.Args関数はフラグの分は除外される
 	fmt.Println(flag.Args())
+
+	// 入出力
+	fmt.Fprintf(os.Stdout, "標準出力\n")
+	fmt.Fprintf(os.Stderr, "標準エラー出力\n")
+	// プログラムの終了
+	// os.Exit(1)
+
+	// log.Fatal: 標準エラー出力にエラーメッセージを表示
+	// os.Exit(1)で以上終了させる
+	// sf, err := os.Open("file")
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// // 関数終了時に閉じる
+	// defer sf.Close()
+
+	// defer: 関数の遅延実行
+	// - 関数終了時に呼び出し
+	// - 引数の評価はdefer呼び出し時
+	// - スタック形式で実行、最後に呼び出されたものが最初に実行
+	msg := "!!!"
+	defer fmt.Println(msg)
+	msg = "world"
+	defer fmt.Println(msg)
+	fmt.Println("hello")
 }
