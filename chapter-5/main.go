@@ -51,4 +51,8 @@ func main() {
 	msg = "world"
 	defer fmt.Println(msg)
 	fmt.Println("hello")
+
+	// forの中でdeferは避ける
+	// - 予約した関数呼び出しはreturn時に実行される
+	// - forの中を関数に分ければ良い
 }
