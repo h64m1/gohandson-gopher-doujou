@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/h64m1/gohandson-gopher-doujou/chapter-5/mycat"
+	"github.com/h64m1/gohandson-gopher-doujou/chapter-5/jpg2png"
 )
 
 // var msg = flag.String("msg", "デフォルト値", "説明")
@@ -59,5 +59,6 @@ func printStd() {
 }
 
 func main() {
-	mycat.Cat()
+	// mycat.Cat()
+	jpg2png.Convert()
 }
