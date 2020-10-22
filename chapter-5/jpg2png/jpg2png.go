@@ -2,8 +2,12 @@ package jpg2png
 
 import (
 	"fmt"
+	"image/jpeg"
+	"image/png"
+	"log"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 // Convert convert jpeg to png
@@ -21,12 +25,40 @@ func Convert() {
 
 	err := filepath.Walk("figure",
 		func(path string, info os.FileInfo, err error) error {
-			if filepath.Ext(path) == ".jpg" {
-				fmt.Println(path)
-			}
+			convert(path)
 			return nil
 		})
 	if err != nil {
 		fmt.Println(err)
 	}
+}
+
+func convert(path string) {
+	// jpg以外は何もしない
+	if filepath.Ext(path) != ".jpg" {
+		return
+	}
+
+	file, err := os.Open(path)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	img, err := jpeg.Decode(file)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	pngFileName := strings.Replace(path, "jpg", "png", 1)
+	pngFile, err := os.Create(pngFileName)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer pngFile.Close()
+
+	// jpg -> png
+	png.Encode(pngFile, img)
+
+	fmt.Println(img.Bounds().String(), pngFileName)
 }
