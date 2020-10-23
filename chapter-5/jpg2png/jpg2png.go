@@ -36,8 +36,7 @@ func Convert() {
 
 	// 画像の拡張子
 	ext := "." + *from
-	isExtOk := ext == ".jpg" || ext == ".gif"
-	if !isExtOk {
+	if !isExtensionOk(ext) {
 		fmt.Println("画像の拡張子はjpg or gifを指定してください")
 		os.Exit(1)
 	}
@@ -51,6 +50,11 @@ func Convert() {
 	if err != nil {
 		fmt.Println(err)
 	}
+}
+
+// isExtensionOk 拡張子がjpg or gifの場合true
+func isExtensionOk(ext string) bool {
+	return ext == ".jpg" || ext == ".gif"
 }
 
 func convert(imgFile imageFile) {
