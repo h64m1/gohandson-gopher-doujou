@@ -1,14 +1,24 @@
 package jpg2png
 
 import (
+	"flag"
 	"fmt"
-	"image/jpeg"
+	"image"
+	_ "image/gif"  // gifのDecode実行用
+	_ "image/jpeg" // jpegのDecode実行用
 	"image/png"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
 )
+
+var from = flag.String("from", "jpg", "変換前の画像形式（デフォルトはjpg: jpg or gif）")
+
+type imageFile struct {
+	Path      string // ファイル名
+	Extension string // 拡張子
+}
 
 // Convert convert jpeg to png
 func Convert() {
@@ -22,10 +32,20 @@ func Convert() {
 	// - 自作パッケージと標準パッケージと準標準パッケージのみを使う
 	// - ユーザ定義型を作ってみる
 	// - GoDocを生成してみる
+	flag.Parse()
+
+	// 画像の拡張子
+	ext := "." + *from
+	isExtOk := ext == ".jpg" || ext == ".gif"
+	if !isExtOk {
+		fmt.Println("画像の拡張子はjpg or gifを指定してください")
+		os.Exit(1)
+	}
 
 	err := filepath.Walk("figure",
 		func(path string, info os.FileInfo, err error) error {
-			convert(path)
+			image := imageFile{Path: path, Extension: ext}
+			convert(image)
 			return nil
 		})
 	if err != nil {
@@ -33,24 +53,25 @@ func Convert() {
 	}
 }
 
-func convert(path string) {
-	// jpg以外は何もしない
-	if filepath.Ext(path) != ".jpg" {
+func convert(imgFile imageFile) {
+	// 指摘拡張子以外は何もしない (defaultはjpg)
+	if filepath.Ext(imgFile.Path) != imgFile.Extension {
 		return
 	}
 
-	file, err := os.Open(path)
+	file, err := os.Open(imgFile.Path)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer file.Close()
 
-	img, err := jpeg.Decode(file)
+	img, _, err := image.Decode(file)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	pngFileName := strings.Replace(path, "jpg", "png", 1)
+	pngExt := ".png"
+	pngFileName := strings.Replace(imgFile.Path, filepath.Ext(imgFile.Path), pngExt, 1)
 	pngFile, err := os.Create(pngFileName)
 	if err != nil {
 		log.Fatal(err)
@@ -60,5 +81,5 @@ func convert(path string) {
 	// jpg -> png
 	png.Encode(pngFile, img)
 
-	fmt.Println(img.Bounds().String(), pngFileName)
+	fmt.Println("convert from", filepath.Base(imgFile.Path), "to", pngFileName)
 }
