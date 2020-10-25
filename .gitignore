@@ -17,4 +17,7 @@
 # main binary
 main
 
+figure
+.DS_Store
+
 .vscode
