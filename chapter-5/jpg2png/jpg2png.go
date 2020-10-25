@@ -1,3 +1,4 @@
+// Package jpg2png jpg or gif画像をpngに変換
 package jpg2png
 
 import (
@@ -20,7 +21,12 @@ type imageFile struct {
 	Extension string // 拡張子
 }
 
-// Convert convert jpeg to png
+// Convert jpg or gif画像をpngに変換
+//
+// jpg2pngを実行したディレクトリ配下にある全ての画像ファイルを対象（デフォルトではjpgが対象）
+//
+// オプション
+//	from [option] optionで画像の拡張子を指定（e.g. ./jpg2png -from gif）
 func Convert() {
 	// 次の仕様を満たすコマンド
 	// - ディレクトリを指定する
