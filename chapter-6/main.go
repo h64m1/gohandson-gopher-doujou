@@ -8,7 +8,13 @@ func main() {
 	// - メソッドのリストがインターフェースを規定しているものと一致する型は、インターフェースを実装していることになる
 
 	var s Stringer = Hex(100)
-	fmt.Print(s.String())
+	fmt.Println(s.String())
+
+	// empty interface
+	var v interface{}
+	v = 100
+	v = "hello world"
+	fmt.Println(v)
 }
 
 // Stringer interface
