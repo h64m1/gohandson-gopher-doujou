@@ -21,6 +21,17 @@ func main() {
 		return "hi"
 	})
 	fmt.Println(s2)
+
+	// 型アサーション
+	// - インターフェース.(型)
+	//   * インターフェース型の値を任意の型にキャスト
+	//   * 第2戻り値にキャストできるかどうかが返る
+	v = 100
+	n, ok := v.(int)
+	fmt.Println(n, ok)
+
+	s, ok := v.(string)
+	fmt.Println(s, ok)
 }
 
 // Stringer interface
