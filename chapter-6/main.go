@@ -32,6 +32,16 @@ func main() {
 
 	s, ok := v.(string)
 	fmt.Println(s, ok)
+
+	// 型スイッチ
+	switch i := v.(type) {
+	case int:
+		fmt.Println(i * 2)
+	case string:
+		fmt.Println(i + "world")
+	default:
+		fmt.Println("default")
+	}
 }
 
 // Stringer interface
