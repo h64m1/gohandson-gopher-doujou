@@ -28,6 +28,8 @@ func ShowExampleInterface() {
 }
 
 func exampleInterface() {
+	fmt.Println("# インターフェースの例")
+
 	var s1 Stringer = Hex(100)
 	fmt.Println(s1.String())
 
