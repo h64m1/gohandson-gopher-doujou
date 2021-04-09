@@ -3,13 +3,24 @@ package main
 import "fmt"
 
 // 構造体に匿名フィールドを埋め込む
-type Hoge struct {
-	N int
+type Hoge interface {
+	M()
+	N()
 }
 
-// Fuga型にHoge型を埋め込む
-type Fuga struct {
+// fuga型にHoge型を埋め込む
+type fuga struct {
 	Hoge // 名前のないフィールドになる
+}
+
+func (f fuga) M() {
+	// Mの振る舞いを変える
+	fmt.Println("Hi")
+	f.Hoge.M() // 元のメソッドを呼ぶ
+}
+
+func HiHoge(h Hoge) Hoge {
+	return fuga{h} // 構造体を作る
 }
 
 // 型リテラルでなければ埋め込められる
@@ -26,14 +37,6 @@ func (h Hex) String() string {
 type Hex2 struct{ Hex }
 
 func main() {
-	f := Fuga{Hoge{N: 100}}
-
-	// Hoge型のフィールドにアクセス出来る
-	fmt.Println(f.N)
-
-	// 型名を指定してアクセス出来る
-	fmt.Println(f.Hoge.N)
-
 	h := Hex2{10}
 	fmt.Println(h.String())
 }
