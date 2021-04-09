@@ -13,8 +13,11 @@ type Fuga struct {
 }
 
 func main() {
-	f := Fuga{}
+	f := Fuga{Hoge{N: 100}}
 
 	// Hoge型のフィールドにアクセス出来る
 	fmt.Println(f.N)
+
+	// 型名を指定してアクセス出来る
+	fmt.Println(f.Hoge.N)
 }
