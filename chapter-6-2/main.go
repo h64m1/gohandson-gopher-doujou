@@ -36,6 +36,20 @@ func (h Hex) String() string {
 // Hex2もStringerを実装
 type Hex2 struct{ Hex }
 
+// インターフェースの合成
+type Reader interface {
+	Read(p []byte) (n int, err error)
+}
+type Writer interface {
+	Write(p []byte) (n int, err error)
+}
+
+// ReaderとWriterを埋め込む
+type ReadWriter interface {
+	Reader
+	Writer
+}
+
 func main() {
 	h := Hex2{10}
 	fmt.Println(h.String())
